@@ -1,7 +1,8 @@
+import ReleaseTransformations._
+
 lazy val root = (project in file("."))
   .settings(
     organization in ThisBuild := "com.github.nomadblacky",
-    version in ThisBuild := "0.1.0-SNAPSHOT",
     sbtPlugin := true,
     name := "sbt-assembly-log4j2",
     description := "sbt assembly plugin merge strategy for log4j2 plugins",
@@ -11,9 +12,19 @@ lazy val root = (project in file("."))
     libraryDependencies ++= Seq(
       "org.apache.logging.log4j" % "log4j-core" % "2.11.2"
     ),
-    publishArtifact in (Compile, packageBin) := true,
-    publishArtifact in (Test, packageBin) := false,
-    publishArtifact in (Compile, packageDoc) := false,
-    publishArtifact in (Compile, packageSrc) := true,
-    publishTo := sonatypePublishTo.value
+    publishTo := sonatypePublishTo.value,
+    releaseProcess := Seq[ReleaseStep](
+      checkSnapshotDependencies,
+      inquireVersions,
+      runClean,
+      runTest,
+      setReleaseVersion,
+      commitReleaseVersion,
+      tagRelease,
+      ReleaseStep(action = Command.process("publishSigned", _)),
+      setNextVersion,
+      commitNextVersion,
+      ReleaseStep(action = Command.process("sonatypeRelease", _)),
+      pushChanges
+    )
   )
