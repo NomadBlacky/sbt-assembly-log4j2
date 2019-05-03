@@ -12,7 +12,7 @@ lazy val root = (project in file(".")).
     scalacOptions := Seq("-deprecation", "-unchecked"),
     addSbtPlugin("com.eed3si9n" % "sbt-assembly" % "0.14.9"),
     libraryDependencies ++= Seq(
-      "org.apache.logging.log4j" % "log4j-core" % "2.8.1"
+      "org.apache.logging.log4j" % "log4j-core" % "2.11.2"
     ),
     publishArtifact in (Compile, packageBin) := true,
     publishArtifact in (Test, packageBin) := false,
