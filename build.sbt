@@ -1,10 +1,7 @@
-lazy val commonSettings = Seq(
-  organization in ThisBuild := "org.idio"
-)
-
 lazy val root = (project in file("."))
-  .settings(commonSettings: _*)
   .settings(
+    organization in ThisBuild := "com.github.nomadblacky",
+    version in ThisBuild := "0.1.0-SNAPSHOT",
     sbtPlugin := true,
     name := "sbt-assembly-log4j2",
     description := "sbt assembly plugin merge strategy for log4j2 plugins",
@@ -17,5 +14,6 @@ lazy val root = (project in file("."))
     publishArtifact in (Compile, packageBin) := true,
     publishArtifact in (Test, packageBin) := false,
     publishArtifact in (Compile, packageDoc) := false,
-    publishArtifact in (Compile, packageSrc) := true
+    publishArtifact in (Compile, packageSrc) := true,
+    publishTo := sonatypePublishTo.value
   )
