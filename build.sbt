@@ -2,9 +2,9 @@ lazy val commonSettings = Seq(
   organization in ThisBuild := "org.idio"
 )
 
-lazy val root = (project in file(".")).
-  settings(commonSettings: _*).
-  settings(
+lazy val root = (project in file("."))
+  .settings(commonSettings: _*)
+  .settings(
     sbtPlugin := true,
     name := "sbt-assembly-log4j2",
     description := "sbt assembly plugin merge strategy for log4j2 plugins",
